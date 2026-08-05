@@ -1,3 +1,18 @@
+<script setup>
+    import { ref } from 'vue' 
+
+    const modalOuverte =ref(false);
+
+    function modalSeance() {
+        modalOuverte.value = true;
+    }
+    
+    function fermerModal() {
+        modalOuverte.value = false;
+    }
+
+   
+</script>
 <template>
     <header class="app">
     <div class="brand">
@@ -30,18 +45,7 @@
 
 </template>
 
-<script setup>
-    import { ref } from 'vue' 
-    const modalOuverte =ref(false);
-    function modalSeance() {
-        modalOuverte.value = true;
-    }
-    function fermerModal() {
-        modalOuverte.value = false;
-    }
 
-   
-</script>
 
 <style scoped>
 main {

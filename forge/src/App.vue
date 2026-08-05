@@ -2,6 +2,7 @@
 import Header from './components/Header.vue'
 import Chrono from './components/Chrono.vue'
 import Exercices from './components/Exercices.vue'
+import test from './components/test.vue';
 
 </script>
 
@@ -10,7 +11,7 @@ import Exercices from './components/Exercices.vue'
   <Header />
   <main>
     <Exercices />
-
+    <test />
     <Chrono />
   </main>
   </div>

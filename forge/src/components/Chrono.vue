@@ -25,3 +25,8 @@
 </div>
 
 </template>
+<style>
+  .chrono {
+    display: none;
+  }
+</style>

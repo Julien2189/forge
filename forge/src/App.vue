@@ -8,11 +8,11 @@ import test from './components/test.vue';
 
 <template>
   <div class="wrap">
-  <Header />
+  
   <main>
     <Exercices />
-    <test />
-    <Chrono />
+    
+  
   </main>
   </div>
 </template>

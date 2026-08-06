@@ -9,6 +9,7 @@
          message.value = event.target.value;
      }
      const exo =  ref('') ;
+
      const PROGRAMS = [
   {
     id:"fullbody",
@@ -126,6 +127,39 @@
 
 </script>
 <template>
+  <main class="programmes-container">
+    <section
+      v-for="programme in PROGRAMS"
+      :key="programme.id"
+      class="programme"
+    >
+      <h1>{{ programme.name }}</h1>
+
+      <p class="programme-description">
+        {{ programme.desc }}
+      </p>
+
+      <!-- Chaque séance : Séance A, Séance B, Push, Pull... -->
+      <div
+        v-for="exo in programme.days"
+        :key="exo.name"
+        class="jour"
+      >
+        <h2>{{ exo.name }}</h2>
+
+        <!-- Chaque exercice -->
+        <div
+          v-for="exercice in exo.ex"
+          :key="exercice.n"
+          class="seance"
+        >
+          <p>{{ exercice.n }}</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+      <!--
      <div>
           <h1> test</h1>
           <h2> {{  message }}</h2>
@@ -137,4 +171,156 @@
           <p v-if="compteur >= 5 && compteur <= 10 ">bonne series</p>
           <p v-if="compteur > 10">Grosse seance</p>
      </div>
+    -->
 </template>
+
+<style scoped>
+:root {
+  --ink: #0e1014;
+  --surface: #16191f;
+  --elev: #1e222b;
+  --elev-2: #272c36;
+  --line: #2c313b;
+  --text: #f5f3ee;
+  --muted: #8b909b;
+  --gold: #f2c14e;
+  --rest: #38e1d0;
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+/* Conteneur principal */
+.programmes-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 18px 100px;
+  color: var(--text);
+}
+
+/* Un programme complet */
+.programme {
+  margin-bottom: 50px;
+  padding: 24px;
+
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+/* Nom du programme */
+.programme > h1 {
+  margin: 0 0 8px;
+
+  color: var(--gold);
+
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Description du programme */
+.programme-description {
+  margin: 0 0 24px;
+
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Une séance complète : Séance A, Push, Pull... */
+.jour {
+  margin-top: 20px;
+  padding: 18px;
+
+  background: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+/* Nom de la séance */
+.jour > h2 {
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+
+  color: var(--rest);
+
+  border-bottom: 1px solid var(--line);
+
+  font-size: 23px;
+  font-weight: 600;
+}
+
+/* Une carte d'exercice */
+.seance {
+  position: relative;
+  overflow: hidden;
+
+  margin-top: 12px;
+  padding: 16px 18px;
+
+  background: var(--elev);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+/* Barre dorée à gauche */
+.seance::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  width: 4px;
+
+  background: var(--gold);
+}
+
+/* Effet au survol */
+.seance:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--gold);
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Nom de l'exercice */
+.seance p {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Responsive téléphone */
+@media (max-width: 600px) {
+  .programmes-container {
+    padding: 20px 12px 80px;
+  }
+
+  .programme {
+    padding: 16px;
+  }
+
+  .jour {
+    padding: 14px;
+  }
+
+  .programme > h1 {
+    font-size: 30px;
+  }
+
+  .jour > h2 {
+    font-size: 20px;
+  }
+}
+</style>

@@ -1,5 +1,10 @@
 <script setup>
      import { ref } from 'vue' 
+     const emit = defineEmits(['exercice-selectionne']) 
+
+     function selectionnerExercice(exercice){
+      emit('exercice-selectionne' , exercice) ;
+     }
      const message = ref('Bonjour vue') ;
      const compteur = ref(0)  ;
      function add() {
@@ -135,7 +140,17 @@
         modalOuverte.value = false;
     }
 
-   
+   function afficherRepos(secondes){
+    const minutes = Math.floor(secondes / 60) ;
+    const resteSecondes = secondes % 60 
+    if(minutes === 0 ) {
+      return `${resteSecondes} secondes` 
+    }
+    if(resteSecondes === 0){
+      return `${minutes} min`
+    }
+    return `${minutes} min ${resteSecondes} s`
+   }
 
 </script>
 <template>
@@ -188,6 +203,11 @@
           class="seance"
         >
           <p>{{ exercice.n }}</p>
+          <p>{{ exercice.m }}</p>
+          <p>Series: {{ exercice.s }}</p>
+          <p>Repetitions : {{ exercice.r }}</p>
+          <p>Repos : {{ afficherRepos(exercice.rest) }}</p>
+          <p></p>
         </div>
       </div>
     </section>

@@ -10,7 +10,7 @@ import test from './components/test.vue';
   <div class="wrap">
   
   <main>
-    <Exercices />
+    <Header />
     
   
   </main>

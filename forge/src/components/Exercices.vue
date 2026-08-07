@@ -125,10 +125,44 @@
   },
 ];
 
+    const modalOuverte =ref(false);
+
+    function modalSeance() {
+        modalOuverte.value = true;
+    }
+    
+    function fermerModal() {
+        modalOuverte.value = false;
+    }
+
+   
+
 </script>
 <template>
-  <main class="programmes-container">
-    <section
+       <header class="app">
+    <div class="brand">
+      <span class="logo">FORGE</span>
+      <span class="tag">Training</span>
+    </div>
+    <button class="btn-lib" @click="modalSeance" id="openLib"><span class="dot"></span> Séances</button>
+  </header>
+
+     <div
+      v-if="modalOuverte"
+      class="modal"
+      @click.self="fermerModal"
+    >
+    
+      <div class="modal-content">
+        <button
+          class="close"
+          type="button"
+          aria-label="Fermer la fenêtre"
+          @click="fermerModal"
+        >
+          &times;
+        </button>
+        <section
       v-for="programme in PROGRAMS"
       :key="programme.id"
       class="programme"
@@ -157,6 +191,11 @@
         </div>
       </div>
     </section>
+
+    </div>
+    </div>
+  <main class="programmes-container">
+    
   </main>
   
       <!--

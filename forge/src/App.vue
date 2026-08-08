@@ -3,7 +3,7 @@ import Header from './components/Header.vue'
 import Chrono from './components/Chrono.vue'
 import Exercices from './components/Exercices.vue'
 import test from './components/test.vue';
-
+import DaysTabs from './components/DaysTabs.vue';
 </script>
 
 <template>
@@ -11,6 +11,10 @@ import test from './components/test.vue';
   
   <main>
     <Header />
+    <Exercices />
+    <DaysTabs />
+    <Chrono />
+   
     
   
   </main>

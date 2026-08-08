@@ -1,216 +1,146 @@
 <script setup>
      import { ref } from 'vue' 
-     const message = ref('Bonjour vue') ;
-     const compteur = ref(0)  ;
-     function add() {
-         compteur.value ++;
-     }
-     function AfficherSaisie(event) {
-         message.value = event.target.value;
-     }
-     const exo =  ref('') ;
 
-     const PROGRAMS = [
-  {
-    id:"fullbody",
-    name:"Full Body Débutant",
-    desc:"3 séances/semaine, tout le corps à chaque fois. Idéal pour démarrer.",
-    days:[
-      {name:"Séance A", ex:[
-        {n:"Squat",            m:"Jambes", s:3, r:"10", rest:120},
-        {n:"Développé couché", m:"Pecs",   s:3, r:"10", rest:120},
-        {n:"Rowing barre",     m:"Dos",    s:3, r:"10", rest:90},
-        {n:"Développé militaire",m:"Épaules",s:3,r:"12", rest:90},
-        {n:"Gainage",          m:"Abdos",  s:3, r:"40s", rest:45},
-      ]},
-      {name:"Séance B", ex:[
-        {n:"Soulevé de terre", m:"Dos",    s:3, r:"8",  rest:150},
-        {n:"Développé incliné",m:"Pecs",   s:3, r:"10", rest:120},
-        {n:"Tractions assistées",m:"Dos",  s:3, r:"8",  rest:120},
-        {n:"Fentes",           m:"Jambes", s:3, r:"12", rest:90},
-        {n:"Crunch",           m:"Abdos",  s:3, r:"15", rest:45},
-      ]},
-      {name:"Séance C", ex:[
-        {n:"Presse à cuisses", m:"Jambes", s:4, r:"12", rest:120},
-        {n:"Dips",             m:"Pecs",   s:3, r:"10", rest:90},
-        {n:"Tirage horizontal",m:"Dos",    s:3, r:"12", rest:90},
-        {n:"Élévations latérales",m:"Épaules",s:3,r:"15",rest:60},
-        {n:"Curl biceps",      m:"Biceps", s:3, r:"12", rest:60},
-      ]},
-    ]
-  },
-  {
-    id:"ppl",
-    name:"Push / Pull / Legs",
-    desc:"Le grand classique : pousser, tirer, jambes. Pour progresser sérieusement.",
-    days:[
-      {name:"Push", ex:[
-        {n:"Développé couché",   m:"Pecs",   s:4, r:"8",  rest:150},
-        {n:"Développé incliné haltères",m:"Pecs",s:3,r:"10",rest:120},
-        {n:"Développé militaire",m:"Épaules",s:4, r:"10", rest:120},
-        {n:"Élévations latérales",m:"Épaules",s:4,r:"15",rest:60},
-        {n:"Extensions triceps", m:"Triceps",s:3, r:"12", rest:60},
-      ]},
-      {name:"Pull", ex:[
-        {n:"Tractions",          m:"Dos",    s:4, r:"8",  rest:150},
-        {n:"Rowing barre",       m:"Dos",    s:4, r:"10", rest:120},
-        {n:"Tirage vertical",    m:"Dos",    s:3, r:"12", rest:90},
-        {n:"Curl barre",         m:"Biceps", s:3, r:"10", rest:75},
-        {n:"Curl marteau",       m:"Biceps", s:3, r:"12", rest:60},
-      ]},
-      {name:"Legs", ex:[
-        {n:"Squat",              m:"Jambes", s:4, r:"8",  rest:180},
-        {n:"Presse à cuisses",   m:"Jambes", s:4, r:"12", rest:120},
-        {n:"Leg curl",           m:"Ischios",s:3, r:"12", rest:90},
-        {n:"Fentes marchées",    m:"Jambes", s:3, r:"12", rest:90},
-        {n:"Mollets debout",     m:"Mollets",s:4, r:"15", rest:45},
-      ]},
-    ]
-  },
-  {
-    id:"upperlower",
-    name:"Haut / Bas",
-    desc:"4 séances : on alterne le haut et le bas du corps deux fois par semaine.",
-    days:[
-      {name:"Haut A", ex:[
-        {n:"Développé couché",   m:"Pecs",   s:4, r:"8",  rest:150},
-        {n:"Rowing barre",       m:"Dos",    s:4, r:"10", rest:120},
-        {n:"Développé militaire",m:"Épaules",s:3, r:"10", rest:90},
-        {n:"Curl biceps",        m:"Biceps", s:3, r:"12", rest:60},
-        {n:"Extensions triceps", m:"Triceps",s:3, r:"12", rest:60},
-      ]},
-      {name:"Bas A", ex:[
-        {n:"Squat",              m:"Jambes", s:4, r:"8",  rest:180},
-        {n:"Soulevé roumain",    m:"Ischios",s:4, r:"10", rest:120},
-        {n:"Presse à cuisses",   m:"Jambes", s:3, r:"12", rest:120},
-        {n:"Mollets debout",     m:"Mollets",s:4, r:"15", rest:45},
-        {n:"Gainage",            m:"Abdos",  s:3, r:"45s",rest:45},
-      ]},
-      {name:"Haut B", ex:[
-        {n:"Développé incliné",  m:"Pecs",   s:4, r:"10", rest:120},
-        {n:"Tractions",          m:"Dos",    s:4, r:"8",  rest:150},
-        {n:"Élévations latérales",m:"Épaules",s:4,r:"15",rest:60},
-        {n:"Tirage horizontal",  m:"Dos",    s:3, r:"12", rest:90},
-        {n:"Dips",               m:"Triceps",s:3, r:"10", rest:90},
-      ]},
-      {name:"Bas B", ex:[
-        {n:"Soulevé de terre",   m:"Dos",    s:4, r:"6",  rest:180},
-        {n:"Fentes bulgares",    m:"Jambes", s:3, r:"10", rest:120},
-        {n:"Leg curl",           m:"Ischios",s:3, r:"12", rest:90},
-        {n:"Leg extension",      m:"Quadris",s:3, r:"15", rest:75},
-        {n:"Crunch lesté",       m:"Abdos",  s:3, r:"15", rest:45},
-      ]},
-    ]
-  },
-  {
-    id:"hiit",
-    name:"Cardio HIIT Maison",
-    desc:"Sans matériel, récup courtes. Brûle-graisse à faire en 25 min.",
-    days:[
-      {name:"Circuit 1", ex:[
-        {n:"Burpees",            m:"Full",   s:4, r:"40s", rest:20},
-        {n:"Mountain climbers",  m:"Cardio", s:4, r:"40s", rest:20},
-        {n:"Squats sautés",      m:"Jambes", s:4, r:"40s", rest:20},
-        {n:"Pompes",             m:"Pecs",   s:4, r:"30s", rest:20},
-        {n:"Gainage",            m:"Abdos",  s:4, r:"45s", rest:20},
-      ]},
-      {name:"Circuit 2", ex:[
-        {n:"Jumping jacks",      m:"Cardio", s:4, r:"45s", rest:20},
-        {n:"Fentes alternées",   m:"Jambes", s:4, r:"40s", rest:20},
-        {n:"Pompes diamant",     m:"Triceps",s:4, r:"30s", rest:25},
-        {n:"Relevés de jambes",  m:"Abdos",  s:4, r:"40s", rest:20},
-        {n:"Talons-fesses",      m:"Cardio", s:4, r:"45s", rest:20},
-      ]},
-    ]
-  },
-];
+       const monthTitle = document.querySelector("#monthTitle");
+    const calendarDays = document.querySelector("#calendarDays");
+    const selectedDate = document.querySelector("#selectedDate");
 
-    const modalOuverte =ref(false);
+    const previousButton = document.querySelector("#previousMonth");
+    const nextButton = document.querySelector("#nextMonth");
 
-    function modalSeance() {
-        modalOuverte.value = true;
-    }
-    
-    function fermerModal() {
-        modalOuverte.value = false;
+    const today = new Date();
+
+    let displayedDate = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      1
+    );
+
+    function displayCalendar() {
+      calendarDays.innerHTML = "";
+
+      const year = displayedDate.getFullYear();
+      const month = displayedDate.getMonth();
+
+      const monthName = displayedDate.toLocaleDateString("fr-FR", {
+        month: "long",
+        year: "numeric"
+      });
+
+      monthTitle.textContent = monthName;
+
+      /*
+        Dernier jour du mois :
+        new Date(année, mois suivant, 0)
+      */
+      const numberOfDays = new Date(year, month + 1, 0).getDate();
+
+      /*
+        Jour de la semaine du premier jour.
+
+        JavaScript :
+        dimanche = 0
+        lundi = 1
+
+        On transforme pour obtenir :
+        lundi = 0
+        dimanche = 6
+      */
+      const firstDay = new Date(year, month, 1).getDay();
+
+      const emptyCells = firstDay === 0
+        ? 6
+        : firstDay - 1;
+
+      // Cases vides avant le premier jour
+      for (let i = 0; i < emptyCells; i++) {
+        const emptyDay = document.createElement("div");
+        emptyDay.classList.add("day", "empty");
+
+        calendarDays.appendChild(emptyDay);
+      }
+
+      // Création des jours du mois
+      for (let dayNumber = 1; dayNumber <= numberOfDays; dayNumber++) {
+        const dayElement = document.createElement("button");
+
+        dayElement.classList.add("day");
+        dayElement.textContent = dayNumber;
+
+        const isToday =
+          dayNumber === today.getDate() &&
+          month === today.getMonth() &&
+          year === today.getFullYear();
+
+        if (isToday) {
+          dayElement.classList.add("today");
+        }
+
+        dayElement.addEventListener("click", function () {
+          document.querySelectorAll(".day").forEach(function (day) {
+            day.classList.remove("selected");
+          });
+
+          dayElement.classList.add("selected");
+
+          const clickedDate = new Date(year, month, dayNumber);
+
+          selectedDate.textContent =
+            "Date sélectionnée : " +
+            clickedDate.toLocaleDateString("fr-FR");
+        });
+
+        calendarDays.appendChild(dayElement);
+      }
     }
 
-   
+    previousButton.addEventListener("click", function () {
+      displayedDate.setMonth(displayedDate.getMonth() - 1);
+      displayCalendar();
+    });
+
+    nextButton.addEventListener("click", function () {
+      displayedDate.setMonth(displayedDate.getMonth() + 1);
+      displayCalendar();
+    });
+
+    displayCalendar();
 
 </script>
 <template>
-       <header class="app">
-    <div class="brand">
-      <span class="logo">FORGE</span>
-      <span class="tag">Training</span>
+ 
+  <div class="calendar">
+
+    <div class="calendar-header">
+      <button id="previousMonth">‹</button>
+
+      <h2 id="monthTitle"></h2>
+
+      <button id="nextMonth">›</button>
     </div>
-    <button class="btn-lib" @click="modalSeance" id="openLib"><span class="dot"></span> Séances</button>
-  </header>
 
-     <div
-      v-if="modalOuverte"
-      class="modal"
-      @click.self="fermerModal"
-    >
-    
-      <div class="modal-content">
-        <button
-          class="close"
-          type="button"
-          aria-label="Fermer la fenêtre"
-          @click="fermerModal"
-        >
-          &times;
-        </button>
-        <section
-      v-for="programme in PROGRAMS"
-      :key="programme.id"
-      class="programme"
-    >
-      <h1>{{ programme.name }}</h1>
-
-      <p class="programme-description">
-        {{ programme.desc }}
-      </p>
-
-      <!-- Chaque séance : Séance A, Séance B, Push, Pull... -->
-      <div
-        v-for="exo in programme.days"
-        :key="exo.name"
-        class="jour"
-      >
-        <h2>{{ exo.name }}</h2>
-
-        <!-- Chaque exercice -->
-        <div
-          v-for="exercice in exo.ex"
-          :key="exercice.n"
-          class="seance"
-        >
-          <p>{{ exercice.n }}</p>
-        </div>
-      </div>
-    </section>
-
+    <div class="weekdays">
+      <div>Lun</div>
+      <div>Mar</div>
+      <div>Mer</div>
+      <div>Jeu</div>
+      <div>Ven</div>
+      <div>Sam</div>
+      <div>Dim</div>
     </div>
-    </div>
+
+    <div class="days" id="calendarDays"></div>
+
+    <p class="selected-date" id="selectedDate">
+      Clique sur une date
+    </p>
+
+  </div>
   <main class="programmes-container">
     
   </main>
   
-      <!--
-     <div>
-          <h1> test</h1>
-          <h2> {{  message }}</h2>
-          <button @click="add">Compteur</button>
-          <p>Compteur : {{ compteur }} </p>
-          <input type="text" @input="AfficherSaisie">
-          <input type="text" v-model="exo">
-          <p v-if="compteur <5 ">Trop peu de serie</p>
-          <p v-if="compteur >= 5 && compteur <= 10 ">bonne series</p>
-          <p v-if="compteur > 10">Grosse seance</p>
-     </div>
-    -->
+
 </template>
 
 <style scoped>
@@ -228,138 +158,121 @@
   --radius-sm: 10px;
 }
 
-/* Conteneur principal */
-.programmes-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 30px 18px 100px;
-  color: var(--text);
-}
+ * {
+      box-sizing: border-box;
+    }
 
-/* Un programme complet */
-.programme {
-  margin-bottom: 50px;
-  padding: 24px;
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
+      background: #0e1014;
+      color: #f5f3ee;
+      font-family: Arial, sans-serif;
+    }
 
-/* Nom du programme */
-.programme > h1 {
-  margin: 0 0 8px;
+    .calendar {
+      width: 380px;
+      padding: 20px;
 
-  color: var(--gold);
+      background: #16191f;
+      border: 1px solid #2c313b;
+      border-radius: 16px;
+    }
 
-  font-size: clamp(28px, 5vw, 42px);
-  font-weight: 700;
-  letter-spacing: 1px;
-}
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
 
-/* Description du programme */
-.programme-description {
-  margin: 0 0 24px;
+    .calendar-header h2 {
+      margin: 0;
+      font-size: 22px;
+      text-transform: capitalize;
+    }
 
-  color: var(--muted);
-  font-size: 14px;
-  line-height: 1.6;
-}
+    .calendar-header button {
+      width: 40px;
+      height: 40px;
 
-/* Une séance complète : Séance A, Push, Pull... */
-.jour {
-  margin-top: 20px;
-  padding: 18px;
+      background: #1e222b;
+      color: #f2c14e;
+      border: 1px solid #2c313b;
+      border-radius: 8px;
 
-  background: var(--ink);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
+      font-size: 20px;
+      cursor: pointer;
+    }
 
-/* Nom de la séance */
-.jour > h2 {
-  margin: 0 0 14px;
-  padding-bottom: 10px;
+    .calendar-header button:hover {
+      border-color: #f2c14e;
+    }
 
-  color: var(--rest);
+    .weekdays,
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
 
-  border-bottom: 1px solid var(--line);
+    .weekdays {
+      margin-bottom: 8px;
+    }
 
-  font-size: 23px;
-  font-weight: 600;
-}
+    .weekdays div {
+      text-align: center;
+      color: #8b909b;
+      font-size: 13px;
+      font-weight: bold;
+    }
 
-/* Une carte d'exercice */
-.seance {
-  position: relative;
-  overflow: hidden;
+    .day {
+      aspect-ratio: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-  margin-top: 12px;
-  padding: 16px 18px;
+      background: #1e222b;
+      border: 1px solid transparent;
+      border-radius: 8px;
 
-  background: var(--elev);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
 
-  transition:
-    transform 0.2s,
-    border-color 0.2s,
-    box-shadow 0.2s;
-}
+    .day:hover {
+      border-color: #f2c14e;
+    }
 
-/* Barre dorée à gauche */
-.seance::before {
-  content: "";
+    .empty {
+      background: transparent;
+      cursor: default;
+    }
 
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
+    .today {
+      background: #f2c14e;
+      color: #16191f;
+      font-weight: bold;
+    }
 
-  width: 4px;
+    .selected {
+      border-color: #38e1d0;
+      color: #38e1d0;
+    }
 
-  background: var(--gold);
-}
+    .selected.today {
+      color: #16191f;
+      border-color: #38e1d0;
+    }
 
-/* Effet au survol */
-.seance:hover {
-  transform: translateY(-2px);
-
-  border-color: var(--gold);
-
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-}
-
-/* Nom de l'exercice */
-.seance p {
-  margin: 0;
-
-  color: var(--text);
-
-  font-size: 16px;
-  font-weight: 600;
-}
-
-/* Responsive téléphone */
-@media (max-width: 600px) {
-  .programmes-container {
-    padding: 20px 12px 80px;
-  }
-
-  .programme {
-    padding: 16px;
-  }
-
-  .jour {
-    padding: 14px;
-  }
-
-  .programme > h1 {
-    font-size: 30px;
-  }
-
-  .jour > h2 {
-    font-size: 20px;
-  }
-}
+    .selected-date {
+      margin-top: 16px;
+      color: #8b909b;
+      text-align: center;
+      font-size: 14px;
+    }
 </style>
